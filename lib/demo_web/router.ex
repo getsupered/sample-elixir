@@ -20,11 +20,6 @@ defmodule DemoWeb.Router do
     get "/", PageController, :home
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", DemoWeb do
-  #   pipe_through :api
-  # end
-
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:demo, :dev_routes) do
     # If you want to use the LiveDashboard in production, you should put
@@ -41,4 +36,6 @@ defmodule DemoWeb.Router do
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
   end
+
+  forward "/api", Absinthe.Plug, schema: Demo.Graph.Schema
 end
